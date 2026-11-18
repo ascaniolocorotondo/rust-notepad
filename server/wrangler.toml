@@ -1,0 +1,15 @@
+# Configurazione per chi pubblica il ponte da riga di comando con `npx wrangler deploy`.
+# (In alternativa si può incollare worker.js direttamente dal sito di Cloudflare.)
+name = "rust-notepad-ai"
+main = "worker.js"
+compatibility_date = "2026-11-01"
+
+# Limite giornaliero per utente: crea il KV con
+#   npx wrangler kv namespace create LIMITS
+# e incolla qui l'id che ti restituisce.
+# [[kv_namespaces]]
+# binding = "LIMITS"
+# id = "INCOLLA-QUI-L-ID"
+
+# La chiave Groq NON va scritta qui. Si imposta come segreto:
+#   npx wrangler secret put GROQ_API_KEY

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rust Notepad</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <input id="search" type="search" placeholder="Cerca note…" autocomplete="off">
+        <button id="new-note" class="icon-btn" title="Nuova nota (⌘N)">＋</button>
+      </div>
+      <ul id="note-list"></ul>
+      <div class="sidebar-bottom">
+        <button id="open-settings" class="ghost-btn">⚙︎ Impostazioni IA</button>
+      </div>
+    </aside>
+
+    <main class="editor">
+      <div id="empty" class="empty">
+        <p>Nessuna nota aperta.</p>
+        <button id="empty-new" class="primary-btn">Crea una nota</button>
+      </div>
+
+      <div id="note" hidden>
+        <div class="note-head">
+          <input id="title" placeholder="Titolo" autocomplete="off" spellcheck="false">
+          <span id="status" class="status"></span>
+          <button id="delete-note" class="ghost-btn" title="Sposta nel Cestino">Elimina</button>
+        </div>
+        <div id="blocks"></div>
+        <p class="hint">Scrivi <kbd>/code</kbd> su una riga vuota e premi Invio per inserire un blocco di codice
+          (es. <kbd>/code python</kbd>).</p>
+      </div>
+    </main>
+  </div>
+
+  <dialog id="settings">
+    <form method="dialog" id="settings-form">
+      <h2>Assistente IA</h2>
+      <p class="muted">Di base usa il servizio gratuito di Rust Notepad, senza chiave. Se vuoi, puoi usare una tua chiave: resta salvata solo su questo computer.</p>
+
+      <label>Servizio
+        <select id="preset">
+          <option value="builtin">Rust Notepad (gratis, già incluso)</option>
+          <option value="groq">Groq con la tua chiave</option>
+          <option value="openrouter">OpenRouter (modelli :free)</option>
+          <option value="gemini">Google Gemini</option>
+          <option value="ollama">Ollama (sul tuo Mac)</option>
+          <option value="custom">Personalizzato</option>
+        </select>
+      </label>
+      <div id="custom-fields">
+        <label>Indirizzo API
+          <input id="base-url" spellcheck="false" autocomplete="off">
+        </label>
+        <label>Modello
+          <input id="model" spellcheck="false" autocomplete="off">
+        </label>
+        <label>Chiave API
+          <input id="api-key" type="password" spellcheck="false" autocomplete="off" placeholder="Incolla qui la tua chiave">
+        </label>
+      </div>
+      <p id="key-help" class="muted"></p>
+
+      <div class="dialog-actions">
+        <button type="button" id="cancel-settings" class="ghost-btn">Annulla</button>
+        <button type="submit" id="save-settings" class="primary-btn">Salva</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="syntax.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
